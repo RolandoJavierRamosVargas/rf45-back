@@ -79,17 +79,14 @@ public class PersonaTelefonoController {
 		return new ResponseEntity<List<TipoTelefono>>(tipoTelefono, HttpStatus.OK);
 	}
     
-   /* @RequestMapping(value = "/editar", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<AlumnoDomicilio> update(@RequestBody AlumnoDomicilio alumnoDomicilio) {
-		System.out.println("Ingreso update");
-		System.out.println(alumnoDomicilio);
+    @RequestMapping(value = "/eliminar/{id}", method = RequestMethod.DELETE)
+	public void delete(@PathVariable("id") Long id) {
+		System.out.println("Ingreso al delete");
+		
 		try {
-			service.update(alumnoDomicilio);				
+			service.delete(id);				
 		} catch (Exception e) {
-			
-			return new ResponseEntity<AlumnoDomicilio>(alumnoDomicilio, HttpStatus.INTERNAL_SERVER_ERROR);
+				
 		}
-
-		return new ResponseEntity<AlumnoDomicilio>(alumnoDomicilio, HttpStatus.OK);
-	}*/
+	}
 }

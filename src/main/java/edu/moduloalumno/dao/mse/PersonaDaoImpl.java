@@ -36,7 +36,16 @@ public class PersonaDaoImpl implements IPersonaDao{
 
 	@Override
 	public void updateAlumno(Persona persona) {
-		
+		//String sql = "UPDATE alumno_programa SET ape_paterno = ?, ape_materno = ?, nom_alumno = ?, nac_fecha = ? , ... = ?, ... = ? ,telefono = ?, telefono_movil = ?, correo_personal = ?, correo = ?  WHERE cod_alumno = ?";
+				String sql = "UPDATE persona SET "
+						+ "persona_apaterno = '"+persona.getApellidoPaterno()+"'"
+						+ ", persona_amaterno = '"+persona.getApellidoMaterno()+"'"
+						+ ", persona_nombres = '"+persona.getNombres()+"'"
+						+ ", persona_fnacimiento = ?"
+						+ " WHERE persona_id = "+persona.getId()+";";
+				System.out.println("query="+sql);
+				jdbcTemplate.update(sql,persona.getFechaNac());
+				
 		
 	}
 
