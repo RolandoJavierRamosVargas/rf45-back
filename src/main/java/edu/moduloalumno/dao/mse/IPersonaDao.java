@@ -7,7 +7,7 @@ import edu.moduloalumno.entity.mse.Persona;
 public interface IPersonaDao {
 	Persona findOne(String  codigo);
 
-	void updateAlumno(Persona persona);
+	void updatePersona(Persona persona);
 	
 	
 }

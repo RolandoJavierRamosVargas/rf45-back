@@ -31,7 +31,7 @@ public class AlumnoMseController {
 	
 	@RequestMapping(value = "/buscar/{idAlum}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<AlumnoMse> getAlumnoById(@PathVariable("idAlum") String codAlumn) {
-		System.out.println("ENTRO A ALUMNO2 + codigo= " + codAlumn);
+		System.out.println("ENTRO A ALUMNO2 esta ejecutando el codigo de alumno + codigo= " + codAlumn);
 		AlumnoMse alu = null;
 		try {
 			alu = service.getAlumnoByCod(codAlumn);

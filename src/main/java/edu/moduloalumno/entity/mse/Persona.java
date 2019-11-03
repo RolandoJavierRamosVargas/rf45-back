@@ -1,7 +1,7 @@
 package edu.moduloalumno.entity.mse;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 
 public class Persona implements Serializable{
 	
@@ -22,13 +22,25 @@ public class Persona implements Serializable{
 	private Integer estadoCivil;
 	private String ultimo;
 	private Integer estado_id;
+	
+	private String codigoAlumnoPrograma;
+	
+	public String getCodigoAlumnoPrograma() {
+		return codigoAlumnoPrograma;
+	}
+	public void setCodigoAlumnoPrograma(String codigoAlumnoPrograma) {
+		this.codigoAlumnoPrograma = codigoAlumnoPrograma;
+	}
 	public Persona() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	
+	
 	public Persona(Integer id, String dni, String apellidoPaterno, String apellidoMaterno, String nombres,
 			Date fechaNac, Integer edad, String ubigeo, Integer numHijos, Integer estadoCivil, String ultimo,
-			Integer estado_id) {
+			Integer estado_id, String codigoAlumnoPrograma) {
 		super();
 		this.id = id;
 		this.dni = dni;
@@ -42,6 +54,7 @@ public class Persona implements Serializable{
 		this.estadoCivil = estadoCivil;
 		this.ultimo = ultimo;
 		this.estado_id = estado_id;
+		this.codigoAlumnoPrograma = codigoAlumnoPrograma;
 	}
 	public Integer getId() {
 		return id;
@@ -120,8 +133,9 @@ public class Persona implements Serializable{
 		return "Persona [id=" + id + ", dni=" + dni + ", apellidoPaterno=" + apellidoPaterno + ", apellidoMaterno="
 				+ apellidoMaterno + ", nombres=" + nombres + ", fechaNac=" + fechaNac + ", edad=" + edad + ", ubigeo="
 				+ ubigeo + ", numHijos=" + numHijos + ", estadoCivil=" + estadoCivil + ", ultimo=" + ultimo
-				+ ", estado_id=" + estado_id + "]";
+				+ ", estado_id=" + estado_id + ", codigoAlumnoPrograma=" + codigoAlumnoPrograma + "]";
 	}
+	
 	
 	
 	

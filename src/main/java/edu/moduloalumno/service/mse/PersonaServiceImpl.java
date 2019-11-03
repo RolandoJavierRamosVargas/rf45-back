@@ -18,8 +18,8 @@ public class PersonaServiceImpl implements IPersonaService{
 	}
 
 	@Override
-	public void updateAlumno(Persona persona) {
-		// TODO Auto-generated method stub
+	public void updatePersona(Persona persona) {
+		personaDao.updatePersona(persona);
 		
 	}
 

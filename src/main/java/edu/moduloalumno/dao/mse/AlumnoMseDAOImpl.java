@@ -46,7 +46,6 @@ public class AlumnoMseDAOImpl implements IAlumnoMseDAO {
 				+ ", ape_materno = '"+alumno.getApellidoMaterno()+"'"
 				+ ", nom_alumno = '"+alumno.getNombre()+"'"
 				+ ", nac_fecha = ?"
-				
 				+ ", telefono = ?"
 				+ ", telefono_movil = '"+alumno.getTelefonoCelular()+"'"
 				+ ", correo_personal = '"+alumno.getCorreoPersonal()+"'"
