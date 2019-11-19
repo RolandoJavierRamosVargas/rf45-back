@@ -16,6 +16,7 @@ public class ConProgramaPorAlumnoRowMapper implements RowMapper<ConProgramaPorAl
 //		alumno.setAnioEgreso(row.getString("anio_egreso"));
 		alumno.setNomPrograma(row.getString("nom_programa"));
 		alumno.setSiglaPrograma(row.getString("sigla_programa"));
+		alumno.setId_programa(row.getInt("id_programa"));
 	
 		return alumno;
 	}

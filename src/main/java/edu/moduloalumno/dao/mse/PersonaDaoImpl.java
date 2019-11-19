@@ -1,5 +1,7 @@
 package edu.moduloalumno.dao.mse;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -7,9 +9,19 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import edu.moduloalumno.entity.mse.AlumnoMse;
+import edu.moduloalumno.entity.mse.AperturaConcepto;
+import edu.moduloalumno.entity.mse.ConProgramaPorAlumno;
+import edu.moduloalumno.entity.mse.Formacion;
+import edu.moduloalumno.entity.mse.Nivel;
 import edu.moduloalumno.entity.mse.Persona;
+import edu.moduloalumno.entity.mse.TipoTelefono;
 import edu.moduloalumno.rowmapper.mse.AlumnoMseRowMapper;
+import edu.moduloalumno.rowmapper.mse.AperturaConceptoRowMapper;
+import edu.moduloalumno.rowmapper.mse.ConProgramaPorAlumnoRowMapper;
+import edu.moduloalumno.rowmapper.mse.FormacionRowMapper;
+import edu.moduloalumno.rowmapper.mse.NivelRowMapper;
 import edu.moduloalumno.rowmapper.mse.PersonaRowMapper;
+import edu.moduloalumno.rowmapper.mse.TipoTelefonoRowMapper;
 
 
 @Transactional
@@ -41,12 +53,63 @@ public class PersonaDaoImpl implements IPersonaDao{
 						+ "persona_apaterno = '"+persona.getApellidoPaterno()+"'"
 						+ ",persona_amaterno = '"+persona.getApellidoMaterno()+"'"
 						+ ",persona_nombres = '"+persona.getNombres()+"'"
+						+ ",persona_dni = '"+persona.getDni()+"'"
 						+ ",persona_fnacimiento = ?"
 						+ " WHERE persona_id = "+persona.getId()+";";
 						
 				System.out.println("query="+sql);
 				jdbcTemplate.update(sql,persona.getFechaNac());
 				
+		
+	}
+
+	@Override
+	public AperturaConcepto findOneConcepto(Integer numero) {
+		String sql="SELECT estado FROM configuracion WHERE id_configuracion="+numero+";";
+		System.out.println(sql);
+		RowMapper<AperturaConcepto> aperturaConceptoRowMapper=new AperturaConceptoRowMapper();
+		AperturaConcepto a=this.jdbcTemplate.query(sql,aperturaConceptoRowMapper).get(0);
+		return a;
+	}
+
+	@Override
+	public void saveFormacion(Formacion formacion) {
+		String sql="INSERT into FORMACION(persona_id,id_programa,nivel_id,formacion_calumno,formacion_fingreso,formacion_fegreso,modalidad_id) VALUES(?,?,?,?,?,?,?)";
+		System.out.println("La consulta es: "+sql);
+        try {
+            jdbcTemplate.update(sql,formacion.getPersona_id(),formacion.getId_programa(),formacion.getNivel_id(),formacion.getFormacion_calumno(),formacion.getFormacion_fingreso(),formacion.getFormacion_fegreso(),formacion.getModalidad());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+		
+	}
+
+	@Override
+	public List<Formacion> findFormacion(Integer id) {
+		String sql="SELECT f.formacion_id, f.modalidad_id,f.persona_id,f.id_programa,f.nivel_id,f.formacion_calumno,f.formacion_fingreso,f.formacion_fegreso,pro.nom_programa,pro.sigla_programa FROM FORMACION f INNER JOIN PERSONA p on p.persona_id=f.persona_id INNER JOIN PROGRAMA pro on pro.id_programa=f.id_programa WHERE f.persona_id="+id+";";
+		System.out.println(sql);
+		RowMapper<Formacion> formacion=new FormacionRowMapper();
+		List<Formacion> listaFormacion=this.jdbcTemplate.query(sql,formacion);
+		System.out.println(listaFormacion);
+				
+		return listaFormacion;
+	}
+
+	@Override
+	public List<Nivel> findNivel() {
+		String sql="SELECT nivel_id,nivel_desc,nivel_ini FROM NIVEL ";
+		System.out.println(sql);
+		 RowMapper<Nivel> rowMapper=new NivelRowMapper();
+		 List<Nivel> nivel = this.jdbcTemplate.query(sql, rowMapper);
+		return nivel;
+	}
+
+	@Override
+	public void deleteFormacion(Integer formacion) {
+		String sql="DELETE FROM FORMACION WHERE formacion_id= ?";
+		System.out.println(sql);
+		jdbcTemplate.update(sql,formacion);
 		
 	}
 
