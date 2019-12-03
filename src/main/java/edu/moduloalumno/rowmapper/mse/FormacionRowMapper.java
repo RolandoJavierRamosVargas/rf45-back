@@ -19,6 +19,7 @@ public class FormacionRowMapper implements RowMapper<Formacion>{
 		formacion.setId_programa(rs.getInt("id_programa"));
 		formacion.setNivel_id(rs.getInt("nivel_id"));
 		formacion.setCodigoPersona(rs.getString("formacion_calumno"));
+		formacion.setInstitucion_desc(rs.getString("institucion_desc"));
 		formacion.setNombrePrograma(rs.getString("nom_programa"));
 		formacion.setSiglaPrograma(rs.getString("sigla_programa"));
 		formacion.setFormacion_fingreso(rs.getDate("formacion_fingreso"));

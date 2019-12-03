@@ -94,7 +94,7 @@ public class PersonaDaoImpl implements IPersonaDao{
 
 	@Override
 	public List<Formacion> findFormacion(Integer id) {
-		String sql="SELECT f.formacion_id, f.modalidad_id,f.persona_id,f.id_programa,f.nivel_id,f.formacion_calumno,f.formacion_fingreso,f.formacion_fegreso,pro.nom_programa,pro.sigla_programa FROM FORMACION f INNER JOIN PERSONA p on p.persona_id=f.persona_id INNER JOIN PROGRAMA pro on pro.id_programa=f.id_programa WHERE f.persona_id="+id+";";
+		String sql="SELECT f.formacion_id, f.modalidad_id,f.persona_id,f.id_programa,f.nivel_id,f.formacion_calumno,f.formacion_fingreso,f.formacion_fegreso,pro.nom_programa,pro.sigla_programa,i.institucion_desc FROM FORMACION f INNER JOIN PERSONA p on p.persona_id=f.persona_id INNER JOIN PROGRAMA pro on pro.id_programa=f.id_programa inner join INSTITUCION i on i.institucion_id = f.institucion_id WHERE f.persona_id="+id+";";
 		System.out.println(sql);
 		RowMapper<Formacion> formacion=new FormacionRowMapper();
 		List<Formacion> listaFormacion=this.jdbcTemplate.query(sql,formacion);

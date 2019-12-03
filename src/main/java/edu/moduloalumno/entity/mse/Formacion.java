@@ -18,6 +18,7 @@ public class Formacion implements Serializable {
 	private String siglaPrograma;
 	private Integer nivel_id;
 	private Integer institucion_id;
+	private String institucion_desc;
 	private String formacion_calumno;
 	private Date formacion_fingreso;
 	private Date formacion_fegreso;
@@ -31,23 +32,21 @@ public class Formacion implements Serializable {
 	public Integer getModalidad() {
 		return modalidad;
 	}
+	public String getInstitucion_desc() {
+		return institucion_desc;
+	}
+	public void setInstitucion_desc(String institucion_desc) {
+		this.institucion_desc = institucion_desc;
+	}
 	public Formacion() {
 	
 	}
 	
 	
-	public Integer getFormacion_id() {
-		return formacion_id;
-	}
-	public void setFormacion_id(Integer formacion_id) {
-		this.formacion_id = formacion_id;
-	}
-	
-	
-	
 	public Formacion(Integer formacion_id, Integer modalidad, Integer persona_id, String codigoPersona,
 			Integer id_programa, String nombrePrograma, String siglaPrograma, Integer nivel_id, Integer institucion_id,
-			String formacion_calumno, Date formacion_fingreso, Date formacion_fegreso, Date formacion_fexped_grado) {
+			String institucion_desc, String formacion_calumno, Date formacion_fingreso, Date formacion_fegreso,
+			Date formacion_fexped_grado) {
 		super();
 		this.formacion_id = formacion_id;
 		this.modalidad = modalidad;
@@ -58,11 +57,22 @@ public class Formacion implements Serializable {
 		this.siglaPrograma = siglaPrograma;
 		this.nivel_id = nivel_id;
 		this.institucion_id = institucion_id;
+		this.institucion_desc = institucion_desc;
 		this.formacion_calumno = formacion_calumno;
 		this.formacion_fingreso = formacion_fingreso;
 		this.formacion_fegreso = formacion_fegreso;
 		this.formacion_fexped_grado = formacion_fexped_grado;
 	}
+	public Integer getFormacion_id() {
+		return formacion_id;
+	}
+	public void setFormacion_id(Integer formacion_id) {
+		this.formacion_id = formacion_id;
+	}
+	
+	
+	
+	
 	public String getSiglaPrograma() {
 		return siglaPrograma;
 	}
@@ -143,10 +153,12 @@ public class Formacion implements Serializable {
 		return "Formacion [formacion_id=" + formacion_id + ", modalidad=" + modalidad + ", persona_id=" + persona_id
 				+ ", codigoPersona=" + codigoPersona + ", id_programa=" + id_programa + ", nombrePrograma="
 				+ nombrePrograma + ", siglaPrograma=" + siglaPrograma + ", nivel_id=" + nivel_id + ", institucion_id="
-				+ institucion_id + ", formacion_calumno=" + formacion_calumno + ", formacion_fingreso="
-				+ formacion_fingreso + ", formacion_fegreso=" + formacion_fegreso + ", formacion_fexped_grado="
-				+ formacion_fexped_grado + "]";
+				+ institucion_id + ", institucion_desc=" + institucion_desc + ", formacion_calumno=" + formacion_calumno
+				+ ", formacion_fingreso=" + formacion_fingreso + ", formacion_fegreso=" + formacion_fegreso
+				+ ", formacion_fexped_grado=" + formacion_fexped_grado + "]";
 	}
+	
+	
 	
 	
 	
