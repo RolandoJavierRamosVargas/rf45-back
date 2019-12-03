@@ -8,8 +8,10 @@ import org.springframework.stereotype.Service;
 import edu.moduloalumno.dao.mse.IPersonaDao;
 import edu.moduloalumno.entity.mse.AperturaConcepto;
 import edu.moduloalumno.entity.mse.Formacion;
+import edu.moduloalumno.entity.mse.Institucion;
 import edu.moduloalumno.entity.mse.Nivel;
 import edu.moduloalumno.entity.mse.Persona;
+import edu.moduloalumno.entity.mse.TipoInstitucion;
 
 @Service
 public class PersonaServiceImpl implements IPersonaService{
@@ -48,7 +50,7 @@ public class PersonaServiceImpl implements IPersonaService{
 
 	@Override
 	public List<Nivel> findNivel() {
-		// 
+		
 		return personaDao.findNivel();
 	}
 
@@ -56,6 +58,18 @@ public class PersonaServiceImpl implements IPersonaService{
 	public void deleteFormacion(Integer formacion) {
 		personaDao.deleteFormacion(formacion);
 		
+	}
+
+	@Override
+	public void saveInstitucion(Institucion institucion) {
+		personaDao.saveInstitucion(institucion);
+		
+	}
+
+	@Override
+	public List<TipoInstitucion> listarTipos() {
+		
+		return personaDao.listarTipos();
 	}
 
 }

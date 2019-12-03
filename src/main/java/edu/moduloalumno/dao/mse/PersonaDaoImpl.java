@@ -12,15 +12,22 @@ import edu.moduloalumno.entity.mse.AlumnoMse;
 import edu.moduloalumno.entity.mse.AperturaConcepto;
 import edu.moduloalumno.entity.mse.ConProgramaPorAlumno;
 import edu.moduloalumno.entity.mse.Formacion;
+import edu.moduloalumno.entity.mse.Institucion;
 import edu.moduloalumno.entity.mse.Nivel;
 import edu.moduloalumno.entity.mse.Persona;
+import edu.moduloalumno.entity.mse.TipoCorreo;
+import edu.moduloalumno.entity.mse.TipoGrado;
+import edu.moduloalumno.entity.mse.TipoInstitucion;
 import edu.moduloalumno.entity.mse.TipoTelefono;
+import edu.moduloalumno.rowmapper.mse.TipoGradoRowMapper;
 import edu.moduloalumno.rowmapper.mse.AlumnoMseRowMapper;
 import edu.moduloalumno.rowmapper.mse.AperturaConceptoRowMapper;
 import edu.moduloalumno.rowmapper.mse.ConProgramaPorAlumnoRowMapper;
 import edu.moduloalumno.rowmapper.mse.FormacionRowMapper;
 import edu.moduloalumno.rowmapper.mse.NivelRowMapper;
 import edu.moduloalumno.rowmapper.mse.PersonaRowMapper;
+import edu.moduloalumno.rowmapper.mse.TipoCorreoRowMapper;
+import edu.moduloalumno.rowmapper.mse.TipoInstitucionRowMapper;
 import edu.moduloalumno.rowmapper.mse.TipoTelefonoRowMapper;
 
 
@@ -74,10 +81,10 @@ public class PersonaDaoImpl implements IPersonaDao{
 
 	@Override
 	public void saveFormacion(Formacion formacion) {
-		String sql="INSERT into FORMACION(persona_id,id_programa,nivel_id,formacion_calumno,formacion_fingreso,formacion_fegreso,modalidad_id) VALUES(?,?,?,?,?,?,?)";
+		String sql="INSERT into FORMACION(persona_id,id_programa,nivel_id,formacion_calumno,formacion_fingreso,formacion_fegreso,modalidad_id,institucion_id) VALUES(?,?,?,?,?,?,?,?)";
 		System.out.println("La consulta es: "+sql);
         try {
-            jdbcTemplate.update(sql,formacion.getPersona_id(),formacion.getId_programa(),formacion.getNivel_id(),formacion.getFormacion_calumno(),formacion.getFormacion_fingreso(),formacion.getFormacion_fegreso(),formacion.getModalidad());
+            jdbcTemplate.update(sql,formacion.getPersona_id(),formacion.getId_programa(),formacion.getNivel_id(),formacion.getFormacion_calumno(),formacion.getFormacion_fingreso(),formacion.getFormacion_fegreso(),formacion.getModalidad(),formacion.getInstitucion_id());
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -111,6 +118,38 @@ public class PersonaDaoImpl implements IPersonaDao{
 		System.out.println(sql);
 		jdbcTemplate.update(sql,formacion);
 		
+	}
+
+	@Override
+	public void saveInstitucion(Institucion institucion) {
+		String sql="insert into institucion(institucion_id,aeconomica_id,tipo_inst_id,institucion_desc,institucion_desc_min,institucion_ini) values (?,?,?,?,?,?)";
+		System.out.println("La consulta es: "+sql);
+        try {
+            jdbcTemplate.update(sql,institucion.getId(),institucion.getIdEconomico(),institucion.getIdTipoInst(),institucion.getInstDesc(),institucion.getInstDescMin(),institucion.getInstIni());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+	}
+
+	@Override
+	public List<TipoInstitucion> listarTipos() {
+		String sql="SELECT tipo_inst_id ,tipo_inst_desc,tipo_inst_ini FROM tipo_institucion ;" ;
+        System.out.println("la consulta es:"+sql);
+        RowMapper<TipoInstitucion> rowMapper=new TipoInstitucionRowMapper();
+        List<TipoInstitucion> tipoInstitucion= jdbcTemplate.query(sql,rowMapper);
+        System.out.println(tipoInstitucion);
+        return tipoInstitucion;
+		
+	}
+
+	@Override
+	public List<TipoGrado> tipoGrado() {
+		String sql="Select id_tipo_grado,nom_tipo_grado from tipo_grado";
+		System.out.println("La consulta es: "+sql);
+		RowMapper<TipoGrado> rowMapper=new TipoGradoRowMapper();
+        List<TipoGrado> tipoGrado= jdbcTemplate.query(sql,rowMapper);
+        System.out.println(tipoGrado);
+		return tipoGrado;
 	}
 
 }

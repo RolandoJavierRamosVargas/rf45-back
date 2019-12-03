@@ -17,9 +17,11 @@ import edu.moduloalumno.entity.mse.AlumnoMse;
 import edu.moduloalumno.entity.mse.AperturaConcepto;
 import edu.moduloalumno.entity.mse.Correo;
 import edu.moduloalumno.entity.mse.Formacion;
+import edu.moduloalumno.entity.mse.Institucion;
 import edu.moduloalumno.entity.mse.Nivel;
 import edu.moduloalumno.entity.mse.Persona;
 import edu.moduloalumno.entity.mse.PersonaTelefono;
+import edu.moduloalumno.entity.mse.TipoInstitucion;
 import edu.moduloalumno.entity.mse.TipoTelefono;
 import edu.moduloalumno.service.mse.IAlumnoService;
 import edu.moduloalumno.service.mse.IPersonaService;
@@ -147,6 +149,42 @@ public class PersonaController {
 			} catch (Exception e) {
 			System.out.println(e);		
 			}
+		}
+	 	
+	 
+	 // Guardar informacion
+	 
+	 @RequestMapping(value = "/guardarInstitucion", method = RequestMethod.POST)
+		public void guardarInstitucion(@RequestBody Institucion institucion, BindingResult result){
+			System.out.println("entro a guardar");
+			System.out.println(institucion);
+			System.out.println("************************");
+			if(result.hasErrors()){
+		      System.out.println("Tieene errores");            
+		     }
+			service.saveInstitucion(institucion);
+
+		}
+	 
+	 //Listar tipos
+	 
+	 @RequestMapping(value = "/listarInstitucion",  method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+		public ResponseEntity<List<TipoInstitucion>> listarInstitucion() {		 
+		 System.out.println("Entro a tipos de institucion");
+			List<TipoInstitucion> tipo = null;
+			try {
+				tipo = service.listarTipos();
+
+				if (tipo == null) {
+					tipo = null;
+				}
+				
+			} catch (Exception e) {
+				
+				return new ResponseEntity<List<TipoInstitucion>>(tipo, HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+
+			return new ResponseEntity<List<TipoInstitucion>>(tipo, HttpStatus.OK);
 		}
 	 
 	 
